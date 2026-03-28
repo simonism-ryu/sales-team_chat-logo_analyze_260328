@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>해외영업팀 5인의 초상</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#041527;color:#E2E8F0;font-family:'Helvetica Neue','Apple SD Gothic Neo','Malgun Gothic',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#041527}
+::-webkit-scrollbar-thumb{background:#009AB8;border-radius:3px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countUp{from{opacity:0.3}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.section{opacity:0;transform:translateY(50px);transition:opacity 0.9s cubic-bezier(.23,1,.32,1),transform 0.9s cubic-bezier(.23,1,.32,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,#009AB840,transparent);margin:0 auto;max-width:1100px}
+.accent{color:#009AB8}
+.lime{color:#B8D544}
+.muted{color:#8A9BB5}
+.tag{font-size:13px;letter-spacing:4px;color:#009AB8;text-transform:uppercase;margin-bottom:8px}
+.chart-box{background:#002D4B;border-radius:16px;padding:24px;border:1px solid #003D66}
+canvas{max-width:100%!important}
+.kw{display:inline-block;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;margin:4px}
+.ogk-logo{filter:brightness(0) invert(1);height:48px;display:block}
+.glass{background:rgba(0,45,75,0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(0,154,184,0.15);border-radius:16px}
+.counter-card{text-align:center;padding:40px 24px;position:relative;overflow:hidden}
+.counter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#009AB8,#B8D544);border-radius:3px 3px 0 0}
+.stat-card{background:#002D4B;border-radius:12px;padding:20px 16px;border-left:3px solid #009AB8;transition:transform 0.2s,box-shadow 0.2s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,154,184,0.15)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="section" id="hero" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 20px;background:radial-gradient(ellipse at 50% 80%,#009AB812 0%,transparent 60%)">
+  <img src="data:image/png;base64,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" class="ogk-logo" alt="OGK" style="height:56px"/>
+  <div style="font-size:14px;letter-spacing:6px;color:#8A9BB5;text-transform:uppercase;margin:24px 0 32px">KakaoTalk Data Analysis &middot; 2025.07 — 2026.03</div>
+  <h1 style="font-size:clamp(36px,7vw,80px);font-weight:800;line-height:1.1;max-width:900px">
+    <span>해외영업팀</span><br><span class="accent">5인의 초상</span>
+  </h1>
+  <p style="font-size:clamp(16px,2.5vw,22px);color:#8A9BB5;margin-top:24px;max-width:600px;line-height:1.6">9개월간의 카카오톡 대화 945건을 분석하여<br>다섯 명의 팀원이 만들어낸 해외영업의 이야기를 펼칩니다.</p>
+  <div style="margin-top:48px">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#009AB8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:bounce 2s infinite"><polyline points="6,9 12,15 18,9"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ OVERVIEW ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px" id="counters">
+      <div class="glass counter-card">
+        <div style="font-size:48px;font-weight:800;color:#009AB8" data-count="945">0<span style="font-size:36px">+</span></div>
+        <div style="font-size:14px;color:#8A9BB5;margin-top:8px;letter-spacing:2px">총 메시지</div>
+      </div>
+      <div class="glass counter-card">
+        <div style="font-size:48px;font-weight:800;color:#009AB8" data-count="161">0<span style="font-size:36px">건</span></div>
+        <div style="font-size:14px;color:#8A9BB5;margin-top:8px;letter-spacing:2px">파일 공유</div>
+      </div>
+      <div class="glass counter-card">
+        <div style="font-size:48px;font-weight:800;color:#B8D544" data-count="34">0<span style="font-size:36px">회</span></div>
+        <div style="font-size:14px;color:#8A9BB5;margin-top:8px;letter-spacing:2px">커피 제안</div>
+      </div>
+      <div class="glass counter-card">
+        <div style="font-size:48px;font-weight:800;color:#B8D544" data-count="9">0<span style="font-size:36px">개월</span></div>
+        <div style="font-size:14px;color:#8A9BB5;margin-top:8px;letter-spacing:2px">분석 기간</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════ MESSAGE VOLUME ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="wrap">
+    <div class="tag">Message Volume</div>
+    <h2 style="font-size:clamp(24px,4vw,40px);font-weight:700;margin-bottom:40px">누가 가장 많이 말했는가</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div>
+        <div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:600">김종만 부장</span><span style="color:#009AB8;font-weight:700">55%</span></div><div style="background:#0a2640;border-radius:4px;height:8px;overflow:hidden"><div style="width:55%;height:100%;border-radius:4px;background:linear-gradient(90deg,#009AB8,#00c4e8);transition:width 1.5s"></div></div></div>
+        <div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:600">유승환 과장</span><span style="color:#B8D544;font-weight:700">13%</span></div><div style="background:#0a2640;border-radius:4px;height:8px;overflow:hidden"><div style="width:13%;height:100%;border-radius:4px;background:linear-gradient(90deg,#B8D544,#d4ef70);transition:width 1.5s"></div></div></div>
+        <div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:600">최수정 대리</span><span style="color:#5DD9C1;font-weight:700">12%</span></div><div style="background:#0a2640;border-radius:4px;height:8px;overflow:hidden"><div style="width:12%;height:100%;border-radius:4px;background:linear-gradient(90deg,#5DD9C1,#80f0d8);transition:width 1.5s"></div></div></div>
+        <div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:600">채가인 대리</span><span style="color:#FF9F43;font-weight:700">11%</span></div><div style="background:#0a2640;border-radius:4px;height:8px;overflow:hidden"><div style="width:11%;height:100%;border-radius:4px;background:linear-gradient(90deg,#FF9F43,#ffb870);transition:width 1.5s"></div></div></div>
+        <div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-weight:600">정광연 과장</span><span style="color:#A78BFA;font-weight:700">9%</span></div><div style="background:#0a2640;border-radius:4px;height:8px;overflow:hidden"><div style="width:9%;height:100%;border-radius:4px;background:linear-gradient(90deg,#A78BFA,#c4b5fd);transition:width 1.5s"></div></div></div>
+      </div>
+      <div class="chart-box"><canvas id="pieChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ TIME ACTIVITY ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="wrap">
+    <div class="tag">Activity Timeline</div>
+    <h2 style="font-size:clamp(24px,4vw,40px);font-weight:700;margin-bottom:12px">시간대별 메시지 활동</h2>
+    <p class="muted" style="font-size:15px;margin-bottom:40px">김종만 부장의 메시지는 밤 10시를 넘어서도 이어진다. 시간을 가리지 않는 팀을 향한 열정이 데이터로 증명된다.</p>
+    <div class="chart-box"><canvas id="timeChart" height="140"></canvas></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ COFFEE INDEX ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px;text-align:center;background:linear-gradient(180deg,transparent 0%,#009AB808 50%,transparent 100%)">
+  <div class="wrap">
+    <div class="tag">Coffee Index</div>
+    <h2 style="font-size:clamp(28px,5vw,52px);font-weight:800;margin-bottom:12px">"커피 한잔 합시다"</h2>
+    <p class="muted" style="font-size:16px;max-width:500px;margin:0 auto 40px">김종만 부장이 커피를 제안한 횟수의 월별 추이.<br>이것은 음료가 아니라 <span class="lime">팀 빌딩 전략</span>이다.</p>
+    <div class="chart-box" style="max-width:700px;margin:0 auto"><canvas id="coffeeChart" height="120"></canvas></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MONTHLY TREND ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="wrap">
+    <div class="tag">Monthly Trend</div>
+    <h2 style="font-size:clamp(24px,4vw,40px);font-weight:700;margin-bottom:40px">월별 활동량 변화</h2>
+    <div class="chart-box"><canvas id="trendChart" height="140"></canvas></div>
+  </div>
+</section>
+
+<div class="divider" style="margin:40px auto"></div>
+
+<!-- ═══════════════════════════ PROFILES HEADER ═══════════════════════════ -->
+<section class="section" style="text-align:center;padding:60px 20px">
+  <h2 style="font-size:clamp(28px,5vw,48px);font-weight:800">Individual <span class="accent">Profiles</span></h2>
+  <p class="muted" style="font-size:15px;margin-top:8px">각 팀원의 DNA를 데이터로 해부합니다</p>
+</section>
+
+<!-- ═══════════════════════════ PROFILE CARDS ═══════════════════════════ -->
+<div id="profiles"></div>
+
+<!-- ═══════════════════════════ FILE RANKING ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px">
+  <div class="wrap">
+    <div class="tag">File Sharing</div>
+    <h2 style="font-size:clamp(24px,4vw,40px);font-weight:700;margin-bottom:40px">파일 공유 랭킹</h2>
+    <div class="chart-box"><canvas id="fileChart" height="120"></canvas></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ TEAM DNA ═══════════════════════════ -->
+<section class="section" style="padding:80px 20px;text-align:center;background:radial-gradient(ellipse at 50% 50%,#009AB808 0%,transparent 60%)">
+  <div class="wrap">
+    <div class="tag">Team DNA</div>
+    <h2 style="font-size:clamp(28px,5vw,48px);font-weight:800;margin-bottom:12px">팀 케미의 비밀</h2>
+    <p class="muted" style="font-size:16px;max-width:540px;margin:0 auto 40px">커피로 시작해서 짬뽕으로 끝나는<br><span class="lime">가족 같은 영업 조직</span>의 DNA를 해부합니다.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+      <div class="chart-box"><canvas id="dnaChart"></canvas></div>
+      <div style="text-align:left">
+        <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-start"><span style="font-size:22px">☕</span><div><p style="font-size:14px;line-height:1.5">김종만 부장의 "커피 한잔"은 팀 빌딩의 시작 신호</p><span class="accent" style="font-size:13px;font-weight:700">34회</span></div></div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-start"><span style="font-size:22px">😂</span><div><p style="font-size:14px;line-height:1.5">유승환 과장의 유머가 터질 때 팀 분위기 최고조</p><span class="lime" style="font-size:13px;font-weight:700">15+회</span></div></div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-start"><span style="font-size:22px">📊</span><div><p style="font-size:14px;line-height:1.5">채가인 대리의 KPI 파일이 팀의 방향을 잡아줌</p><span class="accent" style="font-size:13px;font-weight:700">35건</span></div></div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-start"><span style="font-size:22px">✅</span><div><p style="font-size:14px;line-height:1.5">최수정 대리의 주간보고가 마감을 완성시킴</p><span class="lime" style="font-size:13px;font-weight:700">38건</span></div></div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-start"><span style="font-size:22px">🔍</span><div><p style="font-size:14px;line-height:1.5">정광연 과장의 리서치가 실행 가능성을 검증함</p><span class="accent" style="font-size:13px;font-weight:700">즉시</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CLOSING ═══════════════════════════ -->
+<section class="section" style="min-height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 20px;background:radial-gradient(ellipse at 50% 80%,#009AB812 0%,transparent 50%)">
+  <img src="data:image/png;base64,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" class="ogk-logo" alt="OGK" style="height:40px"/>
+  <h2 style="font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1.3;max-width:700px;margin-top:24px">다섯 명이 만드는<br><span class="accent">하나의 팀</span></h2>
+  <p class="muted" style="font-size:16px;margin-top:20px;max-width:500px;line-height:1.7">업무 강도가 높은 팀임에도 커피 타임, 외식, 회식, 장난 메시지가 꾸준히 이어진다. 이것이 해외영업팀이 성과를 내는 진짜 이유다.</p>
+  <div style="margin-top:40px;padding:12px 28px;border:1px solid #009AB8;border-radius:30px">
+    <span class="accent" style="font-size:14px;letter-spacing:2px">KOREA OGK &middot; SG부문 영업개발팀</span>
+  </div>
+  <div style="margin-top:32px;color:#5A6B82;font-size:12px;letter-spacing:2px">Data Period: 2025.07.01 — 2026.03.28 &middot; Generated by AI Analysis</div>
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   OGK COLOR PALETTE
+   ═══════════════════════════════════════════════════ */
+const TEAL="#009AB8", LIME="#B8D544", MINT="#5DD9C1", AMBER="#FF9F43", VIOLET="#A78BFA";
+const COLORS=[TEAL,LIME,MINT,AMBER,VIOLET];
+const DARK_BG="#002D4B";
+const GRID_COLOR="#003D66";
+const months=["7월","8월","9월","10월","11월","12월","1월","2월","3월"];
+
+const profiles=[
+  {name:"김종만",title:"부장",tagline:"커피 한잔의 여유를 사랑하는\n불면의 지휘관",subtitle:"The Sleepless Commander",
+   stats:[{l:"총 메시지",v:"520+"},{l:"파일 공유",v:"48건"},{l:"커피 제안",v:"34회"},{l:"야간 메시지",v:"36건"}],
+   radar:{labels:["리더십","소통 빈도","팀 케어","전략 기획","실무 지시","유머"],data:[98,95,90,92,96,65]},
+   color:TEAL,
+   keywords:["#커피_한잔_합시다","#뭐지?","#밤새_메시지","#회식_잡는_부장","#커피는_팀빌딩"],
+   quote:'"점심 먹고 커피 한잔 하러 갔다 옵시다."',
+   desc:'전체 메시지의 55%를 차지하는 압도적 소통량. 새벽 1시에도 업무 메시지가 날아오고, 아침 8시에 일일 미션이 시작된다. 그러나 그 사이사이 "커피 한잔 합시다"는 단순한 음료 제안이 아닌 팀 응집력의 비밀 무기.',
+   sig:"매달 정체불명의 결제 내역을 팀에 물어보는 것이 시즌별 이벤트"},
+  {name:"유승환",title:"과장",tagline:"아재개그와 실무력의\n완벽한 공존",subtitle:"The Witty Problem Solver",
+   stats:[{l:"총 메시지",v:"125+"},{l:"파일 공유",v:"28건"},{l:"유머 투하",v:"15+회"},{l:"응답 속도",v:"최상"}],
+   radar:{labels:["기술력","원가분석","프레젠테이션","유머 감각","응답 속도","팀 분위기"],data:[95,92,85,98,90,96]},
+   color:LIME,
+   keywords:["#짬뽕은_사랑입니다","#중고_팀원","#아재개그","#숫자에_강한_남자","#로봇처럼"],
+   quote:'"어제 눈치의 막중한 책임감을 느끼며\n오늘은 12시 전에 대기 타고 있겠습니다"',
+   desc:'2025년 7월 "중고 팀원"으로 합류한 개발+영업의 교차점. 부장님 인정 "우리 팀에서 숫자가 가장 강한듯". 진지한 업무 흐름 속 적절한 유머를 투하하는 타이밍의 달인.',
+   sig:"크리스마스이브에 레깅스만 입고 운동 간 사연으로 부장님 외로움 달래기 시도"},
+  {name:"정광연",title:"과장",tagline:"논리적 반론과\n실무 조사의 달인",subtitle:"The Logical Investigator",
+   stats:[{l:"총 메시지",v:"80+"},{l:"파일 공유",v:"12건"},{l:"조사 업무",v:"즉시"},{l:"재직 기간",v:"6개월"}],
+   radar:{labels:["리서치","논리력","무역 실무","데이터 정확성","응답 속도","프로세스"],data:[96,94,90,85,88,82]},
+   color:VIOLET,
+   keywords:["#알아봐_주세요","#즉시_링크_첨부","#논리적_반론","#새벽4시_수금","#구매부_이동"],
+   quote:'"해당 제품은 공산품이라 수출 허가가\n필요한 부분은 아닐것으로 보이구요."',
+   desc:'2025년 9월 합류 → 2026년 3월 구매부 이동. 짧지만 강렬했던 6개월. "알아봐 주세요"라는 미션이 떨어지면 링크+스크린샷과 함께 상세 답변을 즉시 올리는 리서치의 달인.',
+   sig:"MIDO쇼 준비 현실성을 조목조목 짚어 부장님을 설득시킨 논리력"},
+  {name:"채가인",title:"대리",tagline:"KPI의 수호자,\n팀의 살림꾼",subtitle:"The Data Guardian",
+   stats:[{l:"총 메시지",v:"105+"},{l:"KPI 업로드",v:"35건"},{l:"행정 처리",v:"전담"},{l:"직설 지수",v:"MAX"}],
+   radar:{labels:["데이터 관리","행정 처리","바이어 관리","실행력","솔직함","팀 케어"],data:[96,94,88,92,97,85]},
+   color:AMBER,
+   keywords:["#최종본_최종확정","#사양을_1도_몰라요","#뭘_물어봐요?","#부장님_빼고","#스벅_테이크아웃"],
+   quote:'"유과장님이 부장님은 빼고래요"',
+   desc:'"최종본" → "최종확정" → "최종_최종" 시리즈의 주인공. 100% 바이어 미수금 현황을 가장 정확하게 파악하고, 모르는 건 "1도 몰라요"라고 확실히 말하는 솔직함의 아이콘.',
+   sig:"업무추진비 카드 비밀번호를 단톡방에 공유하는 대담함"},
+  {name:"최수정",title:"대리",tagline:"조용하지만 가장 확실한\n실무의 완성자",subtitle:"The Silent Closer",
+   stats:[{l:"총 메시지",v:"115+"},{l:"주간보고",v:"38건"},{l:"프로세스",v:"완벽"},{l:"맛집 추천",v:"다수"}],
+   radar:{labels:["보고 능력","프로세스","바이어 소통","정보 수집","원칙 준수","꼼꼼함"],data:[97,96,90,88,95,94]},
+   color:MINT,
+   keywords:["#업로드_했습니다","#내일_창립기념일","#매일경제_신문잉요","#담당자_범위를_정해주셔야","#106200원_남았습니다"],
+   quote:'"부장님 메일 보내신 거 없는데\n확인 부탁 드립니다."',
+   desc:'주간이슈를 가장 꾸준히 업로드하는 사람. 데드라인 전에 이미 끝내놓는 타입. 애매한 지시에는 명확한 기준을 요구하고, 틀린 건 스크린샷으로 증거를 제시하는 원칙주의자.',
+   sig:"매일경제 신문 구독료의 정체를 밝혀낸 사내 탐정"},
+];
+
+/* ═══════════════════════════════════════════════════
+   INTERSECTION OBSERVER (scroll animations)
+   ═══════════════════════════════════════════════════ */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:0.12});
+document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+/* ═══════════════════════════════════════════════════
+   COUNTER ANIMATION
+   ═══════════════════════════════════════════════════ */
+const counterObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('[data-count]').forEach(el=>{
+      const target=parseInt(el.dataset.count);
+      const suffix=el.innerHTML.match(/<span[^>]*>([^<]*)<\/span>/)?.[1]||'';
+      let cur=0;const step=Math.max(1,Math.ceil(target/50));
+      const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}el.innerHTML=cur+'<span style="font-size:36px">'+suffix+'</span>';},20);
+    });
+    counterObs.unobserve(e.target);
+  });
+},{threshold:0.5});
+counterObs.observe(document.getElementById('counters'));
+
+/* ═══════════════════════════════════════════════════
+   CHART.JS DEFAULTS
+   ═══════════════════════════════════════════════════ */
+Chart.defaults.color='#8A9BB5';
+Chart.defaults.borderColor=GRID_COLOR;
+Chart.defaults.font.family="'Helvetica Neue','Apple SD Gothic Neo',sans-serif";
+
+/* ── PIE CHART ─────────────────────────────── */
+new Chart(document.getElementById('pieChart'),{
+  type:'doughnut',
+  data:{labels:['김종만','유승환','최수정','채가인','정광연'],datasets:[{data:[520,125,115,105,80],backgroundColor:COLORS,borderWidth:0,hoverOffset:8}]},
+  options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle',font:{size:12}}}}}
+});
+
+/* ── TIME BAR CHART ────────────────────────── */
+new Chart(document.getElementById('timeChart'),{
+  type:'bar',
+  data:{labels:['06-08','08-10','10-12','12-14','14-16','16-18','18-20','20-22','22-02'],
+    datasets:[
+      {label:'김종만',data:[8,145,120,45,80,68,18,22,14],backgroundColor:TEAL},
+      {label:'유승환',data:[2,30,28,12,18,22,4,0,0],backgroundColor:LIME},
+      {label:'최수정',data:[1,28,25,10,20,18,3,0,0],backgroundColor:MINT},
+      {label:'채가인',data:[0,22,20,12,18,16,2,0,0],backgroundColor:AMBER},
+      {label:'정광연',data:[1,18,15,8,14,10,0,0,0],backgroundColor:VIOLET},
+    ]},
+  options:{responsive:true,scales:{x:{stacked:false,grid:{display:false}},y:{grid:{color:GRID_COLOR}}},plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle'}}}}
+});
+
+/* ── COFFEE CHART ──────────────────────────── */
+new Chart(document.getElementById('coffeeChart'),{
+  type:'line',
+  data:{labels:months,datasets:[{label:'커피 제안',data:[3,2,4,5,2,6,5,3,4],borderColor:LIME,backgroundColor:'#B8D54420',fill:true,tension:0.4,borderWidth:3,pointBackgroundColor:LIME,pointRadius:5,pointHoverRadius:8}]},
+  options:{responsive:true,scales:{y:{beginAtZero:true,grid:{color:GRID_COLOR}},x:{grid:{display:false}}},plugins:{legend:{display:false}}}
+});
+
+/* ── MONTHLY TREND ─────────────────────────── */
+new Chart(document.getElementById('trendChart'),{
+  type:'line',
+  data:{labels:months,datasets:[
+    {label:'김종만',data:[62,55,68,58,72,78,60,42,35],borderColor:TEAL,borderWidth:3,pointRadius:4,pointBackgroundColor:TEAL,tension:0.3},
+    {label:'유승환',data:[18,15,12,10,14,16,14,10,8],borderColor:LIME,borderWidth:2,pointRadius:3,pointBackgroundColor:LIME,tension:0.3},
+    {label:'최수정',data:[12,10,14,16,12,18,14,10,8],borderColor:MINT,borderWidth:2,pointRadius:3,pointBackgroundColor:MINT,tension:0.3},
+    {label:'채가인',data:[10,8,12,8,10,16,12,14,8],borderColor:AMBER,borderWidth:2,pointRadius:3,pointBackgroundColor:AMBER,tension:0.3},
+    {label:'정광연',data:[0,0,12,10,14,6,12,8,4],borderColor:VIOLET,borderWidth:2,pointRadius:3,pointBackgroundColor:VIOLET,tension:0.3},
+  ]},
+  options:{responsive:true,scales:{y:{grid:{color:GRID_COLOR}},x:{grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle'}}}}
+});
+
+/* ── FILE RANKING ──────────────────────────── */
+new Chart(document.getElementById('fileChart'),{
+  type:'bar',
+  data:{labels:['김종만','최수정','채가인','유승환','정광연'],datasets:[{label:'파일 수',data:[48,38,35,28,12],backgroundColor:COLORS,borderRadius:6,barThickness:28}]},
+  options:{indexAxis:'y',responsive:true,scales:{x:{grid:{color:GRID_COLOR}},y:{grid:{display:false},ticks:{font:{size:14,weight:'bold'}}}},plugins:{legend:{display:false}}}
+});
+
+/* ── TEAM DNA RADAR ────────────────────────── */
+new Chart(document.getElementById('dnaChart'),{
+  type:'radar',
+  data:{labels:['커피 소비량','야근 빈도','유머 지수','파일 공유량','외식 횟수','회식 시도율'],
+    datasets:[{label:'팀 DNA',data:[95,78,82,90,88,70],borderColor:TEAL,backgroundColor:'#009AB820',borderWidth:2,pointBackgroundColor:TEAL,pointRadius:4}]},
+  options:{responsive:true,scales:{r:{beginAtZero:true,max:100,ticks:{display:false},grid:{color:'#003D66'},angleLines:{color:'#003D66'},pointLabels:{font:{size:12}}}},plugins:{legend:{display:false}}}
+});
+
+/* ═══════════════════════════════════════════════════
+   PROFILE CARDS (generated dynamically)
+   ═══════════════════════════════════════════════════ */
+const profilesContainer=document.getElementById('profiles');
+
+profiles.forEach((p,idx)=>{
+  const section=document.createElement('section');
+  section.className='section';
+  section.style.cssText='min-height:100vh;padding:80px 20px;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(ellipse at 30% 70%,'+p.color+'10 0%,transparent 50%)';
+
+  const canvasId='radar_'+idx;
+
+  section.innerHTML=`
+    <div class="wrap" style="width:100%">
+      <div style="margin-bottom:48px">
+        <div style="font-size:13px;letter-spacing:4px;color:${p.color};text-transform:uppercase;margin-bottom:8px">Profile #${idx+1} &middot; ${p.subtitle}</div>
+        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+          <h2 style="font-size:clamp(36px,6vw,64px);font-weight:800">${p.name}</h2>
+          <span style="font-size:16px;color:${p.color};font-weight:600;border:1px solid ${p.color};border-radius:20px;padding:4px 14px">${p.title}</span>
+        </div>
+        <h3 style="font-size:clamp(20px,3vw,32px);font-weight:300;color:#8A9BB5;margin-top:8px;white-space:pre-line;line-height:1.4">${p.tagline}</h3>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:48px">
+        ${p.stats.map(s=>`
+          <div class="stat-card" style="border-left-color:${p.color}">
+            <div style="font-size:12px;color:#8A9BB5;letter-spacing:1px;margin-bottom:8px">${s.l}</div>
+            <div style="font-size:24px;font-weight:800">${s.v}</div>
+          </div>`).join('')}
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-bottom:40px">
+        <div class="chart-box"><canvas id="${canvasId}"></canvas></div>
+        <div>
+          <blockquote style="font-size:18px;font-style:italic;line-height:1.6;border-left:3px solid ${p.color};padding-left:20px;margin:0 0 24px;white-space:pre-line">${p.quote}</blockquote>
+          <p style="font-size:15px;color:#8A9BB5;line-height:1.8;margin:0 0 20px">${p.desc}</p>
+          <p style="font-size:14px;color:${p.color}">★ ${p.sig}</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        ${p.keywords.map(k=>`<span class="kw" style="background:${p.color}18;color:${p.color};border:1px solid ${p.color}30">${k}</span>`).join('')}
+      </div>
+    </div>`;
+
+  profilesContainer.appendChild(section);
+  observer.observe(section);
+
+  // Radar chart for this profile
+  new Chart(document.getElementById(canvasId),{
+    type:'radar',
+    data:{labels:p.radar.labels,datasets:[{label:p.name,data:p.radar.data,borderColor:p.color,backgroundColor:p.color+'20',borderWidth:2,pointBackgroundColor:p.color,pointRadius:4}]},
+    options:{responsive:true,scales:{r:{beginAtZero:true,max:100,ticks:{display:false},grid:{color:'#003D66'},angleLines:{color:'#003D66'},pointLabels:{font:{size:11}}}},plugins:{legend:{display:false}}}
+  });
+});
+</script>
+</body>
+</html>
